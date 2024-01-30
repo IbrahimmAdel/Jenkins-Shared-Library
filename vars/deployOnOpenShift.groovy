@@ -26,7 +26,7 @@ def call(String imageName ,String deploymentFileName ,String openshiftProject ,S
 	sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' ${deploymentFileName}"
 
 	 withCredentials([openshiftServiceAccount(credentialsId: 'OpenShift-sa-token', variable: 'OPENSHIFT_CREDENTIALS')]) {
-                        sh "oc login --token=${OPENSHIFT_CREDENTIALS} --server=${openshiftCluster} --insecure-skip-tls-verify=true"
+                        sh "oc login --token=${OPENSHIFT_CREDENTIALS} --server=${openshiftCluster}"
                         sh "oc apply -f ."
 	
 	// Log in to OpenShift with serviceaccount and deploy manifists files
