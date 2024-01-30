@@ -25,7 +25,7 @@ def call(String openshiftProject, String imageName) {
         openshift.withCluster(
             cluster: 'OpenShift',
             serverUrlVariable: 'serverURL', 
-            credentialsId: '${openshiftCredentials}'
+            credentialsId: 'OpenShift-token'
         ) {
             openshift.withProject("${openshiftProject}") {
                 script {
