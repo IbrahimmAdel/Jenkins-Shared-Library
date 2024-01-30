@@ -8,6 +8,6 @@ def call(String openshiftCluster, String openshiftProject, String imageName) {
 	openshift.withCluster("${openshiftCluster}") {
                 //openshiftLogin(project: "${openshiftProject}")
 			// 
-			sh "oc apply -f . -n "${openshiftProject}"" 
+			sh "oc apply -f ." 
 		}
 	}
