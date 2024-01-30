@@ -21,7 +21,7 @@ def call(String openshiftCluster, String openshiftProject, String imageName) {
         openshift.withProject("${openshiftProject}") {
             script {
                 // Use the 'script' block to run multiple 'sh' steps
-                sh "oc login --server=${openshift.getApiServer()} --token=${openshift.getToken()}"
+                sh "oc login --server=${openshift.serverURL()} --token=${openshift.token()}"
                 sh "oc project ${openshiftProject}"
                 sh "oc apply -f ."
             }
