@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call(String imageName ,String deploymentFileName ,String openshiftProject ,String openshiftCluster) {
-	openshift.withCluster(server: openshiftCluster) {
-                openshift.withProject(openshiftProject) {
+	openshift.withCluster("${openshiftCluster}") {
+                openshiftLogin(project: "${openshiftProject}")
 			// Update deployment.yaml with new Docker Hub image
 			sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' ${deploymentFileName}"
 			
@@ -9,7 +9,7 @@ def call(String imageName ,String deploymentFileName ,String openshiftProject ,S
 			sh "oc apply -f ." 
 		}
 	}
-}
+
 			
 //def call(String imageName, String deploymentFileName, String openshifProject, String openshiftCluster){ //String imageName, String deploymentFileName, String openshiftCredentialsID, String openshiftServerURL, String openshifProject) {
   //      sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' ${deploymentFileName}"
