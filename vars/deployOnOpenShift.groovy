@@ -1,4 +1,4 @@
-//#!/usr/bin/env groovy
+#!/usr/bin/env groovy
 //def call(String openshiftCluster, String openshiftProject, String imageName) {
     // Update deployment.yaml with new Docker Hub image
    // sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' deployment.yaml"
@@ -12,7 +12,7 @@
     //    }
   //  }
 //}
-#!/usr/bin/env groovy
+
 def call(String openshiftCluster, String openshiftProject, String imageName) {
     // Update deployment.yaml with new Docker Hub image
     sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' deployment.yaml"
