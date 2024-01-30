@@ -27,7 +27,9 @@ def call(String imageName ,String deploymentFileName ,String openshiftProject ,S
 
 	// Log in to OpenShift with serviceaccount and deploy manifists files
 	openshift.withCluster(openshiftCluster) {
-  		openshift.withProject(openshiftProject) {
+		withCredentials([openshiftServiceAccount(credentialsId: 'OpenShift-sa', variable: 'OPENSHIFT_CREDENTIALS')]) {
+  		//openshift.withProject(openshiftProject) {
+			sh "oc login --token=${OPENSHIFT_CREDENTIALS}
 			sh "oc apply -f ." //-n ${openshiftProject} --server=${openshiftCluster}"	
 		}
 	}
