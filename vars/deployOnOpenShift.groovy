@@ -1,29 +1,17 @@
 #!/usr/bin/env groovy
 def call(String openshiftCluster, String openshiftProject, String imageName) {
-	
-	// Update deployment.yaml with new Docker Hub image
-//	sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' deployment.yaml"
+    // Update deployment.yaml with new Docker Hub image
+    sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' deployment.yaml"
 
-	// Login and Deploy on OpenShif cluster
-//	openshift.withCluster(clustername: "${openshiftCluster}" ,serverurlVariable: 'serverURL', tokenVariable: 'token') {
-//		openshift.withProject("${openshiftProject}") {
-//			sh "oc login --server=${serverURL} --token=${token} --insecure-skip-tls-verify"
-//			sh "oc project "${openshiftProject}""
-//			sh "oc apply -f ." 
-//		}
-//	}
-//}
-
-
-	// Update deployment.yaml with new Docker Hub image
-	sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' deployment.yaml"
-	
-	openshift.withCluster(clustername: openshiftCluster, serverUrlVariable: 'serverURL', tokenVariable: 'token') {
-		openshift.withProject(openshiftProject) {
-			sh "oc login --server=${serverURL} --token=${token} --insecure-skip-tls-verify"
-			sh "oc project ${openshiftProject}"
-			sh "oc apply -f ."
-		}
-	}
+    openshift.withCluster(clustername: "${openshiftCluster}", serverUrlVariable: 'serverURL', tokenVariable: 'token') {
+        openshift.withProject("${openshiftProject}") {
+            script {
+                // Use the 'script' block to run multiple 'sh' steps
+                sh "oc login --server=${params.serverURL} --token=${params.token} --insecure-skip-tls-verify"
+                sh "oc project ${openshiftProject}"
+                sh "oc apply -f ."
+            }
+        }
+    }
 }
 
