@@ -8,5 +8,5 @@ def call(String openshiftCluster, String openshiftProject, String imageName) {
 	openshift.withCluster("${openshiftCluster}") {
 	sh "oc project "${openshiftProject}""
 	sh "oc apply -f ." 
-	//}
+	}
 }
