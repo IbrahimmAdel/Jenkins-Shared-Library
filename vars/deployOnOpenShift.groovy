@@ -1,5 +1,5 @@
 #!usr/bin/env groovy
-def call(String imageName, String deploymentFileName, String openshifProject, String openshiftCluster)//String imageName, String deploymentFileName, String openshiftCredentialsID, String openshiftServerURL, String openshifProject) {
+def call(String imageName, String deploymentFileName, String openshifProject, String openshiftCluster){ //String imageName, String deploymentFileName, String openshiftCredentialsID, String openshiftServerURL, String openshifProject) {
 	// Update deployment.yaml with new Docker Hub image
         sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' ${deploymentFileName}"
                     
