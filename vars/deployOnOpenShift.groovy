@@ -29,7 +29,7 @@ def call(String imageName ,String deploymentFileName ,String openshiftProject ,S
 	openshift.withCluster(openshiftCluster) {
 		withCredentials([openshiftServiceAccount(credentialsId: 'OpenShift-sa', variable: 'OPENSHIFT_CREDENTIALS')]) {
   		//openshift.withProject(openshiftProject) {
-			sh "oc login --token=${OPENSHIFT_CREDENTIALS}
+			sh "oc login --token=${OPENSHIFT_CREDENTIALS}"
 			sh "oc apply -f ." //-n ${openshiftProject} --server=${openshiftCluster}"	
 		}
 	}
