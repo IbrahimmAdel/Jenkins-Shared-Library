@@ -25,7 +25,11 @@
 //}
 def call(String imageName ,String deploymentFileName ,String openshiftProject ,String openshiftCluster) {
 	sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' ${deploymentFileName}"
-	sh "oc apply -f . -n ${openshiftProject} --server=${openshiftCluster}"	
+	openshift.withCluster(openshiftCluster) {
+  		openshift.withProject(openshiftProject) {
+			sh "oc apply -f ." //-n ${openshiftProject} --server=${openshiftCluster}"	
+		}
+	}
 }
 
 
