@@ -7,7 +7,7 @@ def call(String openshiftCluster, String openshiftProject, String imageName) {
 	// Login and Deploy on OpenShif cluster
 	openshift.withCluster() {
 		openshift.withProject("${openshiftProject}") {
-			sh "oc project '${openshiftProject}'"
+			sh "oc project "${openshiftProject}""
 			sh "oc apply -f ." 
 		}
 	}
