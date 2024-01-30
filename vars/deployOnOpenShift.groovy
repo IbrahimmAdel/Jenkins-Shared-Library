@@ -20,7 +20,7 @@ def call(String openshiftProject, String imageName) {
     sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|g' deployment.yaml"
 
     // Retrieve OpenShift credentials from Jenkins credentials store
-    withCredentials([openshiftServiceAccount(credentialsId: 'OpenShift-token', variable: 'openshiftCredentials')]) {
+    withCredentials([openshiftServiceAccount(credentialsId: 'OpenShift', variable: 'openshiftCredentials')]) {
         // Login and Deploy on OpenShift cluster
         openshift.withCluster(
             cluster: 'OpenShift',
