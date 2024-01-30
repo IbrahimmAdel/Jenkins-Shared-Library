@@ -3,7 +3,7 @@ def call(String sonarqubeServerName, String sonarqubeAuthenticationToken, String
 	withSonarQubeEnv("${sonarqubeServerName}") {
 	        withCredentials([string(credentialsId: "${sonarqubeAuthenticationToken}", variable: 'token')]) {
         		echo "Running SonarQube Analysis..."
-        		sh "sudo ./gradlew sonar \
+        		sh "./gradlew sonar \
         		    -Dsonar.projectKey=${sonarqubeProjectKey} \
         		    -Dsonar.host.url='http://${sonarqubeHostServer}:9000' \
         		    -Dsonar.login=${token}"       			    
