@@ -21,7 +21,7 @@ def call(String OpenShiftCredentialsID, String openshiftCluster, String openshif
     //openshift.withCluster(clustername: "${openshiftCluster}", serverUrlVariable: 'serverURL', tokenVariable: 'token') {
         //openshift.withProject("${openshiftProject}") {   
                 // Use the 'script' block to run multiple 'sh' steps
-                sh "oc login --server=${openshiftCluster} --token=${OpenShift_CREDENTIALS}"
+                sh "oc login --server=${openshiftCluster} --token=${OpenShift_CREDENTIALS} --insecure-skip-tls-verify"
                 sh "oc project ${openshiftProject}"
                 sh "oc apply -f ."
         //}
